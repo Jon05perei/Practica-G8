@@ -1,0 +1,25 @@
+@model Practica_1.Models.ClienteViewModel
+
+@{
+    ViewData["Title"] = "Detalle de cliente";
+}
+
+<h1>Detalle de cliente</h1>
+<div>
+    <h4>@Model.Nombre @Model.Apellidos</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+
+        <dt class="col-sm-2">Teléfonos</dt>
+        <dd class="col-sm-10">
+            <ul>
+            @foreach (var t in Model.Telefonos)
+            {
+                <li>@t</li>
+            }
+            </ul>
+        </dd>
+    </dl>
+    <a asp-controller="Cliente" asp-action="Index">Volver al listado</a>
+</div>

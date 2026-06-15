@@ -1,0 +1,28 @@
+@model IEnumerable<Practica_1.Models.ClienteViewModel>
+
+@{
+    ViewData["Title"] = "Listado de clientes";
+}
+
+<h1>Listado de clientes</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>@item.Nombre</td>
+            <td>@item.Apellidos</td>
+            <td>@item.Email</td>
+            <td><a asp-controller="Cliente" asp-action="Detalle" asp-route-id="@item.Id">Ver detalle</a></td>
+        </tr>
+}
+    </tbody>
+</table>
