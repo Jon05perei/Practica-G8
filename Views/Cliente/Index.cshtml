@@ -5,6 +5,9 @@
 }
 
 <h1>Listado de clientes</h1>
+<p>
+    <a asp-controller="Cliente" asp-action="Crear" class="btn btn-primary">Registrar cliente</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -21,7 +24,10 @@
             <td>@item.Nombre</td>
             <td>@item.Apellidos</td>
             <td>@item.Email</td>
-            <td><a asp-controller="Cliente" asp-action="Detalle" asp-route-id="@item.Id">Ver detalle</a></td>
+                <td>
+                    <a asp-controller="Cliente" asp-action="Detalle" asp-route-id="@item.Id">Ver detalle</a> |
+                    <a asp-controller="Cliente" asp-action="Editar" asp-route-id="@item.Id">Editar</a>
+                </td>
         </tr>
 }
     </tbody>

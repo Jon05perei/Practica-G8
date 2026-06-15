@@ -1,13 +1,19 @@
-using Practica_1.DAL;
+using Microsoft.EntityFrameworkCore;
 using Practica_1.BLL;
+using Practica_1.DAL;
+using Practica_1.DAL.Practica_1.DAL.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Register application services (in-memory for this sample)
-builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
+// Registrar el DbContext de EF Core con SQLite
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register application services
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
 var app = builder.Build();

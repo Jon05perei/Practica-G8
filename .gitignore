@@ -1,0 +1,10 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Migrations de EF Core (opcional, normalmente SÍ se versionan)

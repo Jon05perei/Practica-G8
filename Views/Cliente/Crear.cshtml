@@ -1,0 +1,73 @@
+﻿@model Practica_1.Models.ClienteFormViewModel
+
+@{
+    ViewData["Title"] = "Registrar cliente";
+}
+
+<h1>Registrar cliente</h1>
+
+<form asp-action="Crear" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Apellidos" class="form-label"></label>
+        <input asp-for="Apellidos" class="form-control" />
+        <span asp-validation-for="Apellidos" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Teléfonos</label>
+        <div id="telefonos-container">
+            @for (int i = 0; i < Model.Telefonos.Count; i++)
+            {
+                <div class="input-group mb-2 telefono-row">
+                    <input type="text" name="Telefonos" class="form-control" value="@Model.Telefonos[i]" placeholder="Número de teléfono" />
+                    <button type="button" class="btn btn-outline-danger btn-quitar-telefono">Quitar</button>
+                </div>
+            }
+        </div>
+        <button type="button" id="btn-agregar-telefono" class="btn btn-outline-secondary btn-sm">+ Agregar teléfono</button>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById('btn-agregar-telefono').addEventListener('click', function () {
+            const container = document.getElementById('telefonos-container');
+            const row = document.createElement('div');
+            row.className = 'input-group mb-2 telefono-row';
+            row.innerHTML = `
+                <input type="text" name="Telefonos" class="form-control" placeholder="Número de teléfono" />
+                <button type="button" class="btn btn-outline-danger btn-quitar-telefono">Quitar</button>
+            `;
+            container.appendChild(row);
+        });
+
+        document.getElementById('telefonos-container').addEventListener('click', function (e) {
+            if (e.target.classList.contains('btn-quitar-telefono')) {
+                const filas = document.querySelectorAll('.telefono-row');
+                if (filas.length > 1) {
+                    e.target.closest('.telefono-row').remove();
+                } else {
+                    e.target.previousElementSibling.value = '';
+                }
+            }
+        });
+    </script>
+}

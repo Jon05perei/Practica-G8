@@ -21,5 +21,8 @@
             </ul>
         </dd>
     </dl>
-    <a asp-controller="Cliente" asp-action="Index">Volver al listado</a>
+    <td>
+        <a asp-controller="Cliente" asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+        <a asp-controller="Cliente" asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+    </td>
 </div>

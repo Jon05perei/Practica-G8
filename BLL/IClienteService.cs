@@ -7,5 +7,8 @@ namespace Practica_1.BLL
     {
         IEnumerable<Cliente> GetAll();
         Cliente? GetById(int id);
+        ResultadoOperacion Create(Cliente cliente);
+        ResultadoOperacion Update(Cliente cliente);
+
     }
 }

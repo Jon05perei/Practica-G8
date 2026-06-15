@@ -7,5 +7,6 @@ namespace Practica_1.DAL
         IEnumerable<Cliente> GetAll();
         Cliente? GetById(int id);
         void Add(Cliente cliente);
+        void Update(Cliente cliente);
     }
 }
