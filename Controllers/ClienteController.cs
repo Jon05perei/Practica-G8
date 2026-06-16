@@ -86,7 +86,6 @@ namespace Practica_1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         [HttpGet]
         public IActionResult Editar(int id)
         {
@@ -104,7 +103,6 @@ namespace Practica_1.Controllers
                     .ToList()
             };
 
-            // Si por alguna razón el cliente no tiene teléfonos, dejamos un campo vacío
             if (!vm.Telefonos.Any())
             {
                 vm.Telefonos.Add(string.Empty);
@@ -143,6 +141,40 @@ namespace Practica_1.Controllers
             }
 
             return RedirectToAction(nameof(Detalle), new { id = cliente.Id });
+        }
+
+        // GET: muestra la página de confirmación
+        [HttpGet]
+        public IActionResult Eliminar(int id)
+        {
+            var c = _service.GetById(id);
+            if (c == null) return NotFound();
+
+            var vm = new ClienteViewModel
+            {
+                Id = c.Id,
+                Nombre = c.Nombre,
+                Apellidos = c.Apellidos,
+                Email = c.Email,
+                Telefonos = c.Telefonos.Select(t => t.Numero)
+            };
+
+            return View(vm);
+        }
+
+        // POST: ejecuta el borrado de verdad
+        [HttpPost, ActionName("Eliminar")]
+        [ValidateAntiForgeryToken]
+        public IActionResult EliminarConfirmado(int id)
+        {
+            var resultado = _service.Delete(id);
+
+            if (!resultado.EsExitoso)
+            {
+                TempData["Error"] = resultado.Mensaje;
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -70,5 +70,15 @@ namespace Practica_1.BLL
             _repository.Update(cliente);
             return ResultadoOperacion.Exito();
         }
+
+        public ResultadoOperacion Delete(int id)
+        {
+            var existente = _repository.GetById(id);
+            if (existente == null)
+                return ResultadoOperacion.Error("El cliente no existe");
+
+            _repository.Delete(id);
+            return ResultadoOperacion.Exito();
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace Practica_1.BLL
         Cliente? GetById(int id);
         ResultadoOperacion Create(Cliente cliente);
         ResultadoOperacion Update(Cliente cliente);
+        ResultadoOperacion Delete(int id);
 
     }
 }

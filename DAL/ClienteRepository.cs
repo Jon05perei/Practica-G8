@@ -30,7 +30,6 @@ namespace Practica_1.DAL
             _context.SaveChanges();
         }
 
-
         public void Update(Cliente cliente)
         {
             var existente = _context.Clientes
@@ -50,6 +49,23 @@ namespace Practica_1.DAL
             {
                 existente.Telefonos.Add(new Telefono { Numero = telefono.Numero });
             }
+
+            _context.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            var cliente = _context.Clientes
+                .Include(c => c.Telefonos)
+                .FirstOrDefault(c => c.Id == id);
+
+            if (cliente == null) return;
+
+            // Borramos primero los teléfonos ligados al cliente
+            _context.Telefonos.RemoveRange(cliente.Telefonos);
+
+            // Luego borramos el cliente
+            _context.Clientes.Remove(cliente);
 
             _context.SaveChanges();
         }

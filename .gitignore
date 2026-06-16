@@ -2,9 +2,11 @@
 .vs/
 *.user
 *.suo
-
 # Build results
 [Bb]in/
 [Oo]bj/
-
-# Migrations de EF Core (opcional, normalmente SÍ se versionan)
+# Base de datos local SQLite
+*.db
+*.db-shm
+*.db-wal
+# Migrations de EF Core (estas SÍ se versionan, no se ignoran)

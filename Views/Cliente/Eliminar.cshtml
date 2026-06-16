@@ -1,0 +1,35 @@
+﻿@model Practica_1.Models.ClienteViewModel
+
+@{
+    ViewData["Title"] = "Eliminar cliente";
+}
+
+<h1 class="h3 mb-4">Eliminar cliente</h1>
+
+<div class="card border-danger shadow-sm">
+    <div class="card-header bg-danger text-white">
+        ¿Está seguro que desea eliminar este cliente?
+    </div>
+    <div class="card-body">
+        <h4>@Model.Nombre @Model.Apellidos</h4>
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+
+            <dt class="col-sm-3">Teléfonos</dt>
+            <dd class="col-sm-9">
+                @foreach (var t in Model.Telefonos)
+                {
+                    <span class="badge bg-secondary me-1">@t</span>
+                }
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer bg-white">
+        <form asp-action="Eliminar" method="post" class="d-inline">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
